@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import axiosWithAuth from "../tools/axiosWithAuth";
+import {useHistory} from 'react-router-dom';
 
 
 const Login = ()=>{
@@ -9,16 +11,34 @@ const Login = ()=>{
         password: ''
     });
 
+    const {push} = useHistory();
+
     const handleChange = (e)=>{
         setCredentials({
             ...credentials,
-            [e.target.name]:e.targt.value,
+            [e.target.name]:e.target.value,
         })
     }
 
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+
+        axiosWithAuth().post('/login', credentials)
+                       .then(res=>{
+                           localStorage.setItem('token', res.data.payload);
+                           push('/protected');
+                       })
+                       .catch(err=>{
+                           console.log(err.response)
+                       })
+    }
+
+
+
     return (
         <div className='form-container'>
-            <form className='nice-form'>
+            <form className='nice-form'
+                  onSubmit={handleSubmit}>
                 <label>
                     Username:
                     <input type='text'
