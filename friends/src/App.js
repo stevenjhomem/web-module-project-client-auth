@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import FriendList from './components/FriendList';
+import AddFriend from './components/AddFriend';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
         <Route exact path='/' component={Home}></Route>
         <Route path='/login' component={Login}></Route>
         <ProtectedRoute path='/protected' component={FriendList}></ProtectedRoute>
+        <Route path='/addnew' component={AddFriend}></Route>
       </Switch>
     </div>
   );

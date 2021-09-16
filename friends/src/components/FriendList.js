@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axiosWithAuth from "../tools/axiosWithAuth";
+import {Link} from 'react-router-dom';
 import Friend from "./Friend";
 
 const FriendList = ()=>{
@@ -24,6 +25,12 @@ const FriendList = ()=>{
             {didFetch && friends.map((friend)=>
                 <Friend friend={friend} key={friend.id}></Friend>
             )}
+
+            <Link to='/addnew'>
+                <button className='cute_button'>
+                    Add A New Friend
+                </button>
+            </Link>
         </div>
     )
 }
